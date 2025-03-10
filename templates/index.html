@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamboree Admission Predictor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #63a69f, #56ab91);
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/soft-paper-2.png'); /* Adding subtle texture */
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            text-align: center;
+            opacity: 0.95;
+        }
+        h2 {
+            color: #4CAF50;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        .subheading {
+            color: #3b9b46;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="number"] {
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            width: 85%;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #56ab91;
+            outline: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2f7e3b;
+        }
+        button:active {
+            background-color: #1f5c2e;
+        }
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jamboree Admission</h2>
+        <p class="subheading">Secure the future with Us.</p>
+        <form id="prediction-form">
+            <input type="number" step="any" id="gre" placeholder="GRE Score" required>
+            <input type="number" step="any" id="toefl" placeholder="TOEFL Score" required>
+            <input type="number" step="any" id="rating" placeholder="University Rating (1-5)" required>
+            <input type="number" step="any" id="sop" placeholder="SOP (1-5)" required>
+            <input type="number" step="any" id="lor" placeholder="LOR (1-5)" required>
+            <input type="number" step="any" id="cgpa" placeholder="CGPA" required>
+            <input type="number" step="any" id="research" placeholder="Research (0 or 1)" required>
+            <button type="button" onclick="getPrediction()">Predict Admission Chance</button>
+        </form>
+        <h3 id="result"></h3>
+        <div class="footer">Powered by Jamboree Education - Shaping Bright Futures</div>
+    </div>
+
+    <script>
+        function getPrediction() {
+            const data = {
+                'GRE Score': document.getElementById('gre').value,
+                'TOEFL Score': document.getElementById('toefl').value,
+                'University Rating': document.getElementById('rating').value,
+                'SOP': document.getElementById('sop').value,
+                'LOR': document.getElementById('lor').value,
+                'CGPA': document.getElementById('cgpa').value,
+                'Research': document.getElementById('research').value
+            };
+
+            fetch('http://localhost:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('result').innerText = 'Chance of Admission: ' + result['Chance of Admit'];
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'Error predicting chance of admission.';
+            });
+        }
+    </script>
+</body>
+</html>
