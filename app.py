@@ -47,6 +47,8 @@ def predict():
     try:
         # Receive input data from frontend
         data = request.get_json()
+
+        # Extract input data
         gre = float(data['GRE Score'])
         toefl = float(data['TOEFL Score'])
         rating = float(data['University Rating'])
@@ -55,7 +57,23 @@ def predict():
         cgpa = float(data['CGPA'])
         research = int(data['Research'])
 
-        # Load the model and scaler
+        # ✅ Input validation
+        if not (0 <= gre <= 340):
+            return jsonify({'error': 'Invalid GRE Score! It should be between 0 and 340.'})
+        if not (0 <= toefl <= 120):
+            return jsonify({'error': 'Invalid TOEFL Score! It should be between 0 and 120.'})
+        if not (1 <= rating <= 5):
+            return jsonify({'error': 'Invalid University Rating! It should be between 1 and 5.'})
+        if not (1 <= sop <= 5):
+            return jsonify({'error': 'Invalid SOP! It should be between 1 and 5.'})
+        if not (1 <= lor <= 5):
+            return jsonify({'error': 'Invalid LOR! It should be between 1 and 5.'})
+        if not (0 <= cgpa <= 10):
+            return jsonify({'error': 'Invalid CGPA! It should be between 0 and 10.'})
+        if research not in [0, 1]:
+            return jsonify({'error': 'Invalid Research value! It should be either 0 or 1.'})
+
+        # ✅ Load the model and scaler
         model = pickle.load(open('model.pkl', 'rb'))
         scaler = pickle.load(open('scaler.pkl', 'rb'))
 
@@ -63,14 +81,15 @@ def predict():
         input_data = np.array([[gre, toefl, rating, sop, lor, cgpa, research]])
         input_data_scaled = scaler.transform(input_data)
 
-        # Make prediction
+        # ✅ Make prediction
         prediction = model.predict(input_data_scaled)
+
+        # ✅ Return the result
         response = {
             'Chance of Admit': round(prediction[0], 4),
             'Model': 'Ridge Regression',
             'Confidence': 'High'
         }
-
         return jsonify(response)
 
     except Exception as e:
