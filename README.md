@@ -86,7 +86,7 @@ Your app will run on: [http://localhost:5000](http://localhost:5000)
 
 ## 💻 Deployment
 The app has been deployed live using **Render.com**. You can access it here:
-👉 **Live Link:** [https://jamboree-predictor.onrender.com](https://jamboree-predictor.onrender.com)
+👉 **Live Link:** [https://jamboree-admission-predictor.onrender.com/](https://jamboree-admission-predictor.onrender.com/)
 
 Every time a new code push is made to GitHub, Render automatically deploys the latest version of the app.
 
