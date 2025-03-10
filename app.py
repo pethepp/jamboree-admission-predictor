@@ -24,8 +24,8 @@ ridge = Ridge(alpha=5.0)
 ridge.fit(X_scaled_df, y)
 
 # Save the model and scaler as pickle files
-pickle.dump(ridge, open('model.pkl', 'wb'))
-pickle.dump(scaler, open('scaler.pkl', 'wb'))
+#pickle.dump(ridge, open('model.pkl', 'wb'))
+#pickle.dump(scaler, open('scaler.pkl', 'wb'))
 
 # Initialize Flask App
 app = Flask(__name__)
