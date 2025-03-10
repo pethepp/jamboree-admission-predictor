@@ -90,19 +90,6 @@ The app has been deployed live using **Render.com**. You can access it here:
 
 Every time a new code push is made to GitHub, Render automatically deploys the latest version of the app.
 
----
-
-## 📷 Screenshots
-### Home Page
-![Home Page](https://via.placeholder.com/600x300?text=Home+Page)
-
-### Prediction Output
-![Prediction](https://via.placeholder.com/600x300?text=Prediction+Output)
-
-_(You can update these screenshots later once you host the app)_
-
----
-
 ## 📂 Project Structure
 ```
 Jamboree_Education
@@ -112,11 +99,7 @@ Jamboree_Education
 ├── requirements.txt <-- Dependencies for deployment
 ├── templates
 │   ├── index.html <-- Frontend UI
-├── static
-│   ├── images
-│       ├── logo.png <-- Jamboree Logo
-```
-
+├── README.md
 ---
 
 ## 👨‍💻 Contributing
