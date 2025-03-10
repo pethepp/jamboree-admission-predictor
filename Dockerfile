@@ -9,6 +9,10 @@ COPY . .
 # Install all dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Explicitly copy the model files to persist them
+COPY model.pkl model.pkl
+COPY scaler.pkl scaler.pkl
+
 # Expose port 5000 for Flask
 EXPOSE 5000
 
