@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
 
 # Load the dataset and preprocess it
-df = pd.read_csv('jamboree_admission.csv').drop(columns=['Serial No.'])
+df = pd.read_csv('Jamboree_Admission.csv').drop(columns=['Serial No.'])
 
 # Clean and preprocess the data
 df.rename(columns={'Chance of Admit ': 'Chance_of_Admit', 'LOR ': 'LOR'}, inplace=True)
